@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farihatu Sa'adah (2206776)</title>
+    <style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    input[type=button] {
+        background-color: #aa7804;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=button]:hover {
+        background-color: #aa7804;
+    }
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=button] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+
+    .detail-pesanan {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .detail-pesanan h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-align: center;
+        color: #aa7804;
+    }
+
+    .detail-pesanan ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: disc;
+    }
+
+    .detail-pesanan li {
+        margin-left: 20px;
+    }
+
+    .total-harga {
+        text-align: right;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .total-harga span {
+        color: #aa7804;
+    }
+    </style>
+
+    <script>
+    function tampilHasil() {
+        var nama = document.getElementById("nama").value;
+        var alamat = document.getElementById("alamatPemesan").value;
+        var jenisKopiElement = document.getElementById("jenisKopi");
+        var jenisKopi = jenisKopiElement.options[jenisKopiElement.selectedIndex].text;
+
+        var hargaKopi = 0;
+        switch (jenisKopi) {
+            case "Kopi Arabika":
+                hargaKopi = 10000;
+                break;
+            case "Kopi Robusta":
+                hargaKopi = 15000;
+                break;
+            case "Kopi Liberika":
+                hargaKopi = 20000;
+                break;
+            case "Kopi Ekselsa":
+                hargaKopi = 25000;
+                break;
+            default:
+                hargaKopi = 0;
+        }
+
+        var totalHargaMakanan = 0;
+        var makananPelengkapList = "<ul>";
+
+        var makananPelengkap1 = document.getElementById("makananPelengkap1");
+        var makananPelengkap2 = document.getElementById("makananPelengkap2");
+        var makananPelengkap3 = document.getElementById("makananPelengkap3");
+
+        if (makananPelengkap1.checked) {
+            totalHargaMakanan += 5000;
+            makananPelengkapList += "<li>Cake (Rp 5000)</li>";
+        }
+        if (makananPelengkap2.checked) {
+            totalHargaMakanan += 10000;
+            makananPelengkapList += "<li>Brownies (Rp 10000)</li>";
+        }
+        if (makananPelengkap3.checked) {
+            totalHargaMakanan += 15000;
+            makananPelengkapList += "<li>Dalgona Candy (Rp 15000)</li>";
+        }
+
+        makananPelengkapList += "</ul>";
+
+        var totalHarga = hargaKopi + totalHargaMakanan;
+
+        var hasilPemesanan =
+            "<div class='detail-pesanan'>" +
+            "<h2>Detail Pesanan</h2>" +
+            "<div><strong>Nama:</strong> " + nama + "</div>" +
+            "<div><strong>Alamat:</strong> " + alamat + "</div>" +
+            "<div><strong>Pesanan Jenis Kopi:</strong> " + jenisKopi + "</div>" +
+            "<div><strong>Makanan Pelengkap:</strong>" + makananPelengkapList + "</div>" +
+            "<div class='total-harga'><span>Total Harga:</span>" + totalHarga + "</div>" +
+            "</div>";
+        document.getElementById("hasil").innerHTML = hasilPemesanan;
+    }
+    </script> 
+</head>
+<body>
+
+    <h2>Form Pemesanan Coffee</h2>
+
+    <div class="container">
+    <form>
+    <div class="row">
+        <div class="col-25">
+        <label for="nama">Nama Lengkap Pemesan</label>
+        </div>
+        <div class="col-75">
+        <input type="text" id="nama" name="nama" placeholder="Masukan Nama Anda ...">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="jenisKopi">Pilih Jenis Kopi</label>
+        </div>
+        <div class="col-75">
+        <select id="jenisKopi" name="jenisKopi">
+            <option value="kopiarabika">Kopi Arabika</option>
+            <option value="kopirobusta">Kopi Robusta</option>
+            <option value="kopiliberika">Kopi Liberika</option>
+            <option value="kopiekselsa">Kopi Ekselsa</option>
+        </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="alamatPemesan">Alamat Pemesan</label>
+        </div>
+        <div class="col-75">
+        <textarea id="alamatPemesan" name="alamatPemesan" placeholder="Alamat Pemesan.." style="height:200px"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="ukuran">Makanan Pelengkap</label>
+        </div>
+        <div class="col-75">
+            <ul style="list-style-type: none; padding: 0;">
+                <li><input type="checkbox" id="makananPelengkap1" name="makananPelengkap1" value="Cake"><label for="vehicle1"> Cake</label></li>
+                <li><input type="checkbox" id="makananPelengkap2" name="makananPelengkap2" value="Brownies"><label for="vehicle2"> Brownies</label></li>
+                <li><input type="checkbox" id="makananPelengkap3" name="makananPelengkap3" value="Dalgona Candy"><label for="vehicle3"> Dalgona Candy</label></li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <input type="button" onClick="tampilHasil()" value="Simpan">
+    </div>
+    </form>
+    </div>
+
+    <div class="row">
+        <div class="col-100">
+        <div id="hasil" name="hasil"></div>
+        </div>
+    </div>
+
+</body>
+</html>
